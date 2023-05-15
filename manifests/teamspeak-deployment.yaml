@@ -54,4 +54,3 @@ spec:
         - name: ts-data
           persistentVolumeClaim:
             claimName: ts-data
-status: {}

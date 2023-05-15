@@ -5,4 +5,4 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 mkdir -p /var/ts3server
 mkdir -p /var/ts3db
-docker compose -f $SCRIPTPATH/../src/stack.yml -p ts-server up --detach
+docker compose -f $SCRIPTPATH/../src/docker-compose.yml -p ts-server up --detach
