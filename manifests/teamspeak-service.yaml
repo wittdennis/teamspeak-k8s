@@ -1,26 +1,22 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.28.0 (c4137012e)
-  creationTimestamp: null
   labels:
-    io.kompose.service: teamspeak
+    app: teamspeak
+    project: teamspeak
   name: teamspeak
 spec:
   ports:
-    - name: "9987"
+    - name: ts
       port: 9987
       protocol: UDP
       targetPort: 9987
-    - name: "10011"
+    - name: tsquery
       port: 10011
       targetPort: 10011
-    - name: "30033"
+    - name: file
       port: 30033
       targetPort: 30033
   selector:
-    io.kompose.service: teamspeak
-status:
-  loadBalancer: {}
+    app: teamspeak
+    project: teamspeak

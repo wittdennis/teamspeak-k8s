@@ -1,29 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.28.0 (c4137012e)
-  creationTimestamp: null
   labels:
-    io.kompose.service: teamspeak
+    app: teamspeak
+    project: teamspeak
   name: teamspeak
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: teamspeak
-  strategy:
-    type: Recreate
+      app: teamspeak
+      project: teamspeak
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.version: 1.28.0 (c4137012e)
-      creationTimestamp: null
       labels:
-        io.kompose.network/src-default: "true"
-        io.kompose.service: teamspeak
+        app: teamspeak
+        project: teamspeak
     spec:
       containers:
         - env:
@@ -50,7 +42,10 @@ spec:
               protocol: UDP
             - containerPort: 10011
             - containerPort: 30033
-          resources: {}
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 500m
           volumeMounts:
             - mountPath: /var/ts3server
               name: ts-data
