@@ -5,4 +5,5 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 mkdir -p /var/ts3server
 mkdir -p /var/ts3db
-docker compose -f $SCRIPTPATH/../src/docker-compose.yml -p ts-server up --detach
+mkdir -p /var/run/mysqld
+docker compose -f $SCRIPTPATH/src/docker-compose.yml -p ts-server up --detach
