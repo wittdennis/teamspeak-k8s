@@ -1,11 +1,13 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: teamspeak
     project: teamspeak
   name: teamspeak
+  namespace: personal
 spec:
+  serviceName: teamspeak
   replicas: 1
   selector:
     matchLabels:

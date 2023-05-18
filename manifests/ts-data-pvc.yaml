@@ -5,10 +5,11 @@ metadata:
     app: teamspeak
     project: teamspeak
   name: ts-data
+  namespace: personal
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
-status: {}
+      storage: 10Gi
+  storageClassName: hcloud-volumes

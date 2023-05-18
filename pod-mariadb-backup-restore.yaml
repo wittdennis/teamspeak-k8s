@@ -1,0 +1,139 @@
+piVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: 56805b8e5574fc1dd3c5a6eff1f08bde57fcc6b4b2ed5d4b160333a190a39942
+    cni.projectcalico.org/podIP: 10.128.43.7/32
+    cni.projectcalico.org/podIPs: 10.128.43.7/32
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"mariadb-backup-restore","project":"teamspeak"},"name":"mariadb-backup-restore","namespace":"personal"},"spec":{"containers":[{"args":["--copy-back","--target-dir=/var/mariadb/backup"],"command":["mariabackup"],"image":"mariadb:10.8.3-jammy","name":"mariadb-backup-restore","resources":{"limits":{"cpu":"500m","memory":"128Mi"}},"volumeMounts":[{"mountPath":"/var/lib/mysql","name":"db-data"},{"mountPath":"/var/mariadb/backup","name":"db-backup"}]}],"volumes":[{"hostPath":{"path":"/var/lib/mysql"},"name":"db-data"},{"hostPath":{"path":"/var/mariadb/backup"},"name":"db-backup"}]}}
+  creationTimestamp: "2023-05-18T18:51:03Z"
+  labels:
+    app: mariadb-backup-restore
+    project: teamspeak
+  name: mariadb-backup-restore
+  namespace: personal
+  resourceVersion: "7286587"
+  uid: 02f122dd-168f-46c1-a147-1a40939288a9
+spec:
+  containers:
+  - args:
+    - --copy-back
+    - --target-dir=/var/mariadb/backup
+    command:
+    - mariabackup
+    image: mariadb:10.8.3-jammy
+    imagePullPolicy: IfNotPresent
+    name: mariadb-backup-restore
+    resources:
+      limits:
+        cpu: 500m
+        memory: 128Mi
+      requests:
+        cpu: 500m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/lib/mysql
+      name: db-data
+    - mountPath: /var/mariadb/backup
+      name: db-backup
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xxtsk
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: worker-0
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /var/lib/mysql
+      type: ""
+    name: db-data
+  - hostPath:
+      path: /var/mariadb/backup
+      type: ""
+    name: db-backup
+  - name: kube-api-access-xxtsk
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-18T18:51:03Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-18T18:51:03Z"
+    message: 'containers with unready status: [mariadb-backup-restore]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-18T18:51:03Z"
+    message: 'containers with unready status: [mariadb-backup-restore]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-05-18T18:51:03Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://ecfd8003e2258178d801548a1aa3c2c0ebcafc0d8302bd2393204dec9be06ca3
+    image: docker.io/library/mariadb:10.8.3-jammy
+    imageID: docker.io/library/mariadb@sha256:0abf60f81588662e716c27c7f1b54a72b3bf879e0ca88fc393e1741970ec7f3f
+    lastState:
+      terminated:
+        containerID: containerd://ecfd8003e2258178d801548a1aa3c2c0ebcafc0d8302bd2393204dec9be06ca3
+        exitCode: 1
+        finishedAt: "2023-05-18T18:51:48Z"
+        reason: Error
+        startedAt: "2023-05-18T18:51:48Z"
+    name: mariadb-backup-restore
+    ready: false
+    restartCount: 3
+    started: false
+    state:
+      waiting:
+        message: back-off 40s restarting failed container=mariadb-backup-restore pod=mariadb-backup-restore_personal(02f122dd-168f-46c1-a147-1a40939288a9)
+        reason: CrashLoopBackOff
+  hostIP: 168.119.157.151
+  phase: Running
+  podIP: 10.128.43.7
+  podIPs:
+  - ip: 10.128.43.7
+  qosClass: Guaranteed
+  startTime: "2023-05-18T18:51:03Z"
