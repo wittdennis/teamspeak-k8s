@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: teamspeak
+    project: teamspeak
+  name: teamspeak
+  namespace: personal
+spec:
+  serviceName: teamspeak
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teamspeak
+      project: teamspeak
+  template:
+    metadata:
+      labels:
+        app: teamspeak
+        project: teamspeak
+    spec:
+      containers:
+        - env:
+            - name: TS3SERVER_DB_HOST
+              value: postgres
+            - name: TS3SERVER_DB_NAME
+              value: teamspeak
+            - name: TS3SERVER_DB_PASSWORD
+              value: example
+            - name: TS3SERVER_DB_PLUGIN
+              value: ts3db_mariadb
+            - name: TS3SERVER_DB_SQLCREATEPATH
+              value: create_mariadb
+            - name: TS3SERVER_DB_USER
+              value: teamspeak
+            - name: TS3SERVER_DB_WAITUNTILREADY
+              value: "30"
+            - name: TS3SERVER_LICENSE
+              value: accept
+          image: teamspeak:3.13.7
+          name: teamspeak
+          ports:
+            - containerPort: 9987
+              protocol: UDP
+            - containerPort: 10011
+            - containerPort: 30033
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 500m
+          volumeMounts:
+            - mountPath: /var/ts3server
+              name: ts-data
+      restartPolicy: Always
+      volumes:
+        - name: ts-data
+          persistentVolumeClaim:
+            claimName: ts-data
