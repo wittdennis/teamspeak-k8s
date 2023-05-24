@@ -26,11 +26,14 @@ spec:
             - name: TS3SERVER_DB_NAME
               value: teamspeak
             - name: TS3SERVER_DB_PASSWORD
-              value: example
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: teamspeak.postgres.credentials.postgresql.acid.zalan.do
             - name: TS3SERVER_DB_PLUGIN
-              value: ts3db_mariadb
+              value: ts3db_postgresql
             - name: TS3SERVER_DB_SQLCREATEPATH
-              value: create_mariadb
+              value: create_postgresql
             - name: TS3SERVER_DB_USER
               value: teamspeak
             - name: TS3SERVER_DB_WAITUNTILREADY
