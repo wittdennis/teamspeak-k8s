@@ -5,7 +5,7 @@ metadata:
     app: teamspeak
     project: teamspeak
   name: teamspeak
-  namespace: personal
+  namespace: teamspeak
 spec:
   ports:
     - name: ts

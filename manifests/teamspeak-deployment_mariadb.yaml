@@ -5,7 +5,7 @@ metadata:
     app: teamspeak
     project: teamspeak
   name: teamspeak
-  namespace: personal
+  namespace: teamspeak
 spec:
   serviceName: teamspeak
   replicas: 1
@@ -22,17 +22,23 @@ spec:
       containers:
         - env:
             - name: TS3SERVER_DB_HOST
-              value: db
+              value: teamspeak-mariadb
             - name: TS3SERVER_DB_NAME
               value: teamspeak
             - name: TS3SERVER_DB_PASSWORD
-              value: example
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: teamspeak.user.teamspeak.mariadb
+            - name: TS3SERVER_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: teamspeak.user.teamspeak.mariadb
             - name: TS3SERVER_DB_PLUGIN
               value: ts3db_mariadb
             - name: TS3SERVER_DB_SQLCREATEPATH
               value: create_mariadb
-            - name: TS3SERVER_DB_USER
-              value: root
             - name: TS3SERVER_DB_WAITUNTILREADY
               value: "30"
             - name: TS3SERVER_LICENSE
