@@ -5,7 +5,7 @@ metadata:
     app: teamspeak
     project: teamspeak
   name: ts-data
-  namespace: personal
+  namespace: teamspeak
 spec:
   accessModes:
     - ReadWriteOnce
