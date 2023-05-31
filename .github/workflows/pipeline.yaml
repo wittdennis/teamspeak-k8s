@@ -3,7 +3,7 @@ on: [push]
 jobs:
   deploy:
     runs-on: ubuntu-22.04
-    # if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
     environment: k8s
     steps:
       - uses: actions/checkout@v3
