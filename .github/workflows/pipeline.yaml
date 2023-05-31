@@ -46,7 +46,7 @@ jobs:
       - uses: Azure/k8s-deploy@v4
         name: deploy mariadb
         with:
-          namespace: "personal"
+          namespace: "teamspeak"
           action: deploy
           manifests: |
             manifests/database
