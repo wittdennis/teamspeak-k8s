@@ -1,0 +1,13 @@
+apiVersion: mariadb.mmontes.io/v1alpha1
+kind: Grant
+metadata:
+  name: grant
+spec:
+  mariaDbRef:
+    name: teamspeak-mariadb
+  privileges:
+    - "ALL"
+  database: "teamspeak"
+  table: "*"
+  username: teamspeak
+  grantOption: true

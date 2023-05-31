@@ -26,6 +26,7 @@ services:
       MYSQL_DATABASE: teamspeak
     volumes:
       - db_data:/var/lib/mysql
+      - db_socket:/var/run/mysqld
 
 volumes:
   ts_data:
@@ -40,3 +41,9 @@ volumes:
       o: bind
       type: none
       device: /var/ts3db
+  db_socket:
+   driver: local
+   driver_opts:
+      o: bind
+      type: none
+      device: /var/run/mysqld

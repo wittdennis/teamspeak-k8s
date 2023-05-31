@@ -1,0 +1,60 @@
+name: cd-pipeline
+on: [push]
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/master'
+    environment: k8s
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: azure/setup-kubectl@v3
+        name: install kubectl
+        with:
+          version: v1.26.3
+
+      - name: k8s set cluster
+        uses: azure/k8s-set-context@v3
+        with:
+          method: service-account
+          k8s-url: ${{ secrets.K8S_API_URL }}
+          k8s-secret: ${{ secrets.K8S_SERVICEACCOUNT_SECRET }}
+
+      - name: ensure namespace
+        run: |
+          kubectl create namespace teamspeak --dry-run=client -o yaml | kubectl apply -f -
+
+      - name: switch to namespace
+        run: |
+          kubectl config set-context --current --namespace teamspeak
+
+      - name: create mariadb root secret
+        env:
+          MARIADB_ROOT_PASSWORD: ${{ secrets.MARIADB_ROOT_PASSWORD }}
+        run: |
+          kubectl delete secret root.user.teamspeak.mariadb --ignore-not-found=true
+          kubectl create secret generic root.user.teamspeak.mariadb --from-literal=password=${MARIADB_ROOT_PASSWORD}
+
+      - name: create teamspeak user secret
+        env:
+          TEAMSPEAK_USER_PASSWORD: ${{ secrets.TEAMSPEAK_USER_PASSWORD }}
+          TEAMSPEAK_USER_NAME: teamspeak
+        run: |
+          kubectl delete secret teamspeak.user.teamspeak.mariadb --ignore-not-found=true
+          kubectl create secret generic teamspeak.user.teamspeak.mariadb --from-literal=username=${TEAMSPEAK_USER_NAME} --from-literal=password=${TEAMSPEAK_USER_PASSWORD}
+
+      - uses: Azure/k8s-deploy@v4
+        name: deploy mariadb
+        with:
+          namespace: "teamspeak"
+          action: deploy
+          manifests: |
+            manifests/database
+
+      - uses: Azure/k8s-deploy@v4
+        name: deploy teamspeak server
+        with:
+          namespace: "teamspeak"
+          action: deploy
+          manifests: |
+            manifests/teamspeak

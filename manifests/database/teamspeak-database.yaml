@@ -1,0 +1,9 @@
+apiVersion: mariadb.mmontes.io/v1alpha1
+kind: Database
+metadata:
+  name: teamspeak
+spec:
+  mariaDbRef:
+    name: teamspeak-mariadb
+  characterSet: utf8mb4
+  collate: utf8mb4_unicode_520_ci

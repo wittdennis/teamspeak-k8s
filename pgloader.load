@@ -1,0 +1,4 @@
+LOAD DATABASE
+    FROM mysql://root:example@localhost:3306/teamspeak
+    INTO postgresql://postgres:password@localhost:5432/teamspeak
+ALTER schema 'teamspeak' rename to 'public';
