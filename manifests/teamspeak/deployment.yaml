@@ -50,8 +50,11 @@ spec:
           ports:
             - containerPort: 9987
               protocol: UDP
+              name: voice
             - containerPort: 10011
+              name: serverquey
             - containerPort: 30033
+              name: filetransfer
           resources:
             limits:
               memory: 512Mi
@@ -59,6 +62,30 @@ spec:
           volumeMounts:
             - mountPath: /var/ts3server
               name: ts-data
+        - name: metrics-exporter
+          image: denniswitt/ts3exporter:1.0
+          env:
+            - name: ENABLE_CHANNEL_METRICS
+              value: "1"
+            - name: IGNORE_FLOOD_LIMITS
+              value: "1"
+            - name: SERVERQUERY_USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: teamspeak-metrics-user
+            - name: SERVERQUERY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: teamspeak-metrics-user
+          ports:
+            - containerPort: 9189
+              name: metrics
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 100m
       restartPolicy: Always
       volumes:
         - name: ts-data

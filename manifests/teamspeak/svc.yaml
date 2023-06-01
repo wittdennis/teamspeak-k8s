@@ -8,14 +8,14 @@ metadata:
   namespace: teamspeak
 spec:
   ports:
-    - name: ts
+    - name: voice
       port: 9987
       protocol: UDP
       targetPort: 9987
-    - name: tsquery
+    - name: serverquery
       port: 10011
       targetPort: 10011
-    - name: file
+    - name: filetransfer
       port: 30033
       targetPort: 30033
   selector:

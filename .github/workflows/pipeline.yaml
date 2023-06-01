@@ -51,6 +51,14 @@ jobs:
           manifests: |
             manifests/database
 
+      - name: create teamspeak metrics user secret
+        env:
+          SERVERQUERY_USERNAME: ${{ secrets.SERVERQUERY_USERNAME }}
+          SERVERQUERY_PASSWORD: ${{ secrets.SERVERQUERY_PASSWORD }}
+        run: |
+          kubectl delete secret teamspeak-metrics-user --ignore-not-found=true
+          kubectl create secret generic teamspeak-metrics-user --from-literal=username=${SERVERQUERY_USERNAME} --from-literal=password=${SERVERQUERY_PASSWORD}
+
       - uses: Azure/k8s-deploy@v4
         name: deploy teamspeak server
         with:
