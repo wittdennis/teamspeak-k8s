@@ -2,24 +2,25 @@
     "__inputs": [
         {
             "name": "DS_PROMETHEUS",
-            "label": "Prometheus",
+            "label": "prometheus",
             "description": "",
             "type": "datasource",
             "pluginId": "prometheus",
             "pluginName": "Prometheus"
         }
     ],
+    "__elements": {},
     "__requires": [
         {
             "type": "grafana",
             "id": "grafana",
             "name": "Grafana",
-            "version": "6.6.0"
+            "version": "9.5.2"
         },
         {
             "type": "panel",
             "id": "graph",
-            "name": "Graph",
+            "name": "Graph (old)",
             "version": ""
         },
         {
@@ -39,7 +40,10 @@
         "list": [
             {
                 "builtIn": 1,
-                "datasource": "-- Grafana --",
+                "datasource": {
+                    "type": "datasource",
+                    "uid": "grafana"
+                },
                 "enable": true,
                 "hide": true,
                 "iconColor": "rgba(0, 211, 255, 1)",
@@ -49,15 +53,18 @@
         ]
     },
     "editable": true,
-    "gnetId": null,
+    "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
     "id": null,
-    "iteration": 1585486667736,
     "links": [],
+    "liveNow": false,
     "panels": [
         {
             "collapsed": false,
-            "datasource": null,
+            "datasource": {
+                "type": "datasource",
+                "uid": "grafana"
+            },
             "gridPos": {
                 "h": 1,
                 "w": 24,
@@ -66,11 +73,42 @@
             },
             "id": 12,
             "panels": [],
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "datasource",
+                        "uid": "grafana"
+                    },
+                    "refId": "A"
+                }
+            ],
             "title": "General",
             "type": "row"
         },
         {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
             "gridPos": {
                 "h": 5,
                 "w": 5,
@@ -80,47 +118,56 @@
             "id": 2,
             "options": {
                 "colorMode": "value",
-                "fieldOptions": {
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
                     "calcs": [
                         "mean"
                     ],
-                    "defaults": {
-                        "mappings": [],
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
-                                }
-                            ]
-                        }
-                    },
-                    "overrides": [],
+                    "fields": "",
                     "values": false
                 },
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto"
+                "textMode": "auto"
             },
-            "pluginVersion": "6.6.0",
+            "pluginVersion": "9.5.2",
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "sum(ts3_serverinfo_online)",
                     "refId": "A"
                 }
             ],
-            "timeFrom": null,
-            "timeShift": null,
             "title": "Online Virtual Servers",
             "type": "stat"
         },
         {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
             "gridPos": {
                 "h": 5,
                 "w": 4,
@@ -130,47 +177,56 @@
             "id": 4,
             "options": {
                 "colorMode": "value",
-                "fieldOptions": {
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
                     "calcs": [
                         "mean"
                     ],
-                    "defaults": {
-                        "mappings": [],
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
-                                }
-                            ]
-                        }
-                    },
-                    "overrides": [],
+                    "fields": "",
                     "values": false
                 },
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto"
+                "textMode": "auto"
             },
-            "pluginVersion": "6.6.0",
+            "pluginVersion": "9.5.2",
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "sum(ts3_serverinfo_channels_online{virtualserver=~\"${virtualserver}\"})",
                     "refId": "A"
                 }
             ],
-            "timeFrom": null,
-            "timeShift": null,
             "title": "Channels Online",
             "type": "stat"
         },
         {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
             "gridPos": {
                 "h": 5,
                 "w": 4,
@@ -180,51 +236,64 @@
             "id": 18,
             "options": {
                 "colorMode": "value",
-                "fieldOptions": {
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
                     "calcs": [
                         "lastNotNull"
                     ],
-                    "defaults": {
-                        "mappings": [],
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
-                                }
-                            ]
-                        }
-                    },
-                    "overrides": [],
+                    "fields": "",
                     "values": false
                 },
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto"
+                "textMode": "auto"
             },
-            "pluginVersion": "6.6.0",
+            "pluginVersion": "9.5.2",
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "sum(ts3_channel_permanent{virtualserver=~\"${virtualserver}\"})",
                     "refId": "A"
                 },
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "",
                     "refId": "B"
                 }
             ],
-            "timeFrom": null,
-            "timeShift": null,
             "title": "Permanent Channels",
             "type": "stat"
         },
         {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
             "gridPos": {
                 "h": 5,
                 "w": 4,
@@ -234,51 +303,64 @@
             "id": 19,
             "options": {
                 "colorMode": "value",
-                "fieldOptions": {
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
                     "calcs": [
                         "lastNotNull"
                     ],
-                    "defaults": {
-                        "mappings": [],
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 80
-                                }
-                            ]
-                        }
-                    },
-                    "overrides": [],
+                    "fields": "",
                     "values": false
                 },
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto"
+                "textMode": "auto"
             },
-            "pluginVersion": "6.6.0",
+            "pluginVersion": "9.5.2",
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "sum(ts3_channel_password{virtualserver=~\"${virtualserver}\"})",
                     "refId": "A"
                 },
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "",
                     "refId": "B"
                 }
             ],
-            "timeFrom": null,
-            "timeShift": null,
             "title": "Password Protected Channels",
             "type": "stat"
         },
         {
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 0
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
             "gridPos": {
                 "h": 5,
                 "w": 4,
@@ -288,46 +370,37 @@
             "id": 20,
             "options": {
                 "colorMode": "value",
-                "fieldOptions": {
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
                     "calcs": [
                         "mean"
                     ],
-                    "defaults": {
-                        "mappings": [],
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                },
-                                {
-                                    "color": "red",
-                                    "value": 0
-                                }
-                            ]
-                        }
-                    },
-                    "overrides": [],
+                    "fields": "",
                     "values": false
                 },
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "auto"
+                "textMode": "auto"
             },
-            "pluginVersion": "6.6.0",
+            "pluginVersion": "9.5.2",
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "sum(ts3_channel_unencrypted{virtualserver=~\"${virtualserver}\"})",
                     "refId": "A"
                 },
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "",
                     "refId": "B"
                 }
             ],
-            "timeFrom": null,
-            "timeShift": null,
             "title": "Unencrypted Channels",
             "type": "stat"
         },
@@ -336,7 +409,16 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "links": []
+                },
+                "overrides": []
+            },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
@@ -360,9 +442,10 @@
             "linewidth": 1,
             "nullPointMode": "null",
             "options": {
-                "dataLinks": []
+                "alertThreshold": true
             },
             "percentage": false,
+            "pluginVersion": "9.5.2",
             "pointradius": 2,
             "points": false,
             "renderer": "flot",
@@ -372,15 +455,17 @@
             "steppedLine": false,
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "rate(ts3_exporter_data_model_refresh_errors_total[5m])",
                     "legendFormat": "{{instance}}",
                     "refId": "A"
                 }
             ],
             "thresholds": [],
-            "timeFrom": null,
             "timeRegions": [],
-            "timeShift": null,
             "title": "Exporter Error Rate (last 5m)",
             "tooltip": {
                 "shared": true,
@@ -389,38 +474,58 @@
             },
             "type": "graph",
             "xaxis": {
-                "buckets": null,
                 "mode": "time",
-                "name": null,
                 "show": true,
                 "values": []
             },
             "yaxes": [
                 {
                     "format": "cps",
-                    "label": null,
                     "logBase": 1,
-                    "max": null,
-                    "min": null,
                     "show": true
                 },
                 {
                     "format": "short",
-                    "label": null,
                     "logBase": 1,
-                    "max": null,
-                    "min": null,
                     "show": true
                 }
             ],
             "yaxis": {
-                "align": false,
-                "alignLevel": null
+                "align": false
             }
         },
         {
-            "cacheTimeout": null,
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "decimals": 1,
+                    "mappings": [
+                        {
+                            "id": 0,
+                            "op": "=",
+                            "text": "N/A",
+                            "type": 1,
+                            "value": "null"
+                        }
+                    ],
+                    "max": 100,
+                    "min": 0,
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "s"
+                },
+                "overrides": []
+            },
             "gridPos": {
                 "h": 7,
                 "w": 24,
@@ -431,69 +536,58 @@
             "links": [],
             "options": {
                 "colorMode": "value",
-                "fieldOptions": {
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
                     "calcs": [
                         "last"
                     ],
-                    "defaults": {
-                        "decimals": 1,
-                        "mappings": [
-                            {
-                                "id": 0,
-                                "op": "=",
-                                "text": "N/A",
-                                "type": 1,
-                                "value": "null"
-                            }
-                        ],
-                        "max": 100,
-                        "min": 0,
-                        "nullValueMode": "connected",
-                        "thresholds": {
-                            "mode": "absolute",
-                            "steps": [
-                                {
-                                    "color": "green",
-                                    "value": null
-                                }
-                            ]
-                        },
-                        "unit": "s"
-                    },
-                    "overrides": [],
+                    "fields": "",
                     "values": false
                 },
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "horizontal"
+                "textMode": "auto"
             },
-            "pluginVersion": "6.6.0",
+            "pluginVersion": "9.5.2",
             "repeat": "virtualserver",
             "repeatDirection": "h",
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "ts3_serverinfo_uptime{virtualserver=~\"${virtualserver}\"}",
                     "legendFormat": "{{virtualserver}}",
                     "refId": "A"
                 }
             ],
-            "timeFrom": null,
-            "timeShift": null,
             "title": "Uptime in Seconds",
             "type": "stat"
         },
         {
             "collapsed": false,
-            "datasource": null,
+            "datasource": {
+                "type": "datasource",
+                "uid": "grafana"
+            },
             "gridPos": {
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 13
+                "y": 20
             },
             "id": 8,
             "panels": [],
-            "repeat": null,
+            "targets": [
+                {
+                    "datasource": {
+                        "type": "datasource",
+                        "uid": "grafana"
+                    },
+                    "refId": "A"
+                }
+            ],
             "title": "Network",
             "type": "row"
         },
@@ -502,14 +596,23 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "links": []
+                },
+                "overrides": []
+            },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
                 "h": 10,
                 "w": 24,
                 "x": 0,
-                "y": 14
+                "y": 21
             },
             "hiddenSeries": false,
             "id": 15,
@@ -528,9 +631,10 @@
             "linewidth": 1,
             "nullPointMode": "null",
             "options": {
-                "dataLinks": []
+                "alertThreshold": true
             },
             "percentage": false,
+            "pluginVersion": "9.5.2",
             "pointradius": 2,
             "points": false,
             "renderer": "flot",
@@ -545,50 +649,80 @@
             "steppedLine": false,
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "rate(ts3_serverinfo_control_bytes_sent_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} control bytes send",
                     "refId": "B"
                 },
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "rate(ts3_serverinfo_control_bytes_received_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} control bytes received",
                     "refId": "C"
                 },
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "rate(ts3_serverinfo_file_transfer_bytes_sent_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} file transfer bytes send",
                     "refId": "A"
                 },
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "rate(ts3_serverinfo_file_transfer_bytes_received_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} file transfer bytes received",
                     "refId": "D"
                 },
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "rate(ts3_serverinfo_keepalive_bytes_sent_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} keepalive bytes send",
                     "refId": "E"
                 },
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "rate(ts3_serverinfo_keepalive_bytes_received_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} keepalive bytes received",
                     "refId": "F"
                 },
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "rate(ts3_serverinfo_speech_bytes_sent_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} speech bytes send",
                     "refId": "G"
                 },
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "rate(ts3_serverinfo_speech_bytes_received_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} speech bytes received",
                     "refId": "H"
                 }
             ],
             "thresholds": [],
-            "timeFrom": null,
             "timeRegions": [],
-            "timeShift": null,
             "title": "Used Bandwidth",
             "tooltip": {
                 "shared": true,
@@ -597,33 +731,24 @@
             },
             "type": "graph",
             "xaxis": {
-                "buckets": null,
                 "mode": "time",
-                "name": null,
                 "show": true,
                 "values": []
             },
             "yaxes": [
                 {
                     "format": "Bps",
-                    "label": null,
                     "logBase": 1,
-                    "max": null,
-                    "min": null,
                     "show": true
                 },
                 {
                     "format": "short",
-                    "label": null,
                     "logBase": 1,
-                    "max": null,
-                    "min": null,
                     "show": true
                 }
             ],
             "yaxis": {
-                "align": false,
-                "alignLevel": null
+                "align": false
             }
         },
         {
@@ -631,14 +756,17 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+            },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
                 "h": 8,
                 "w": 24,
                 "x": 0,
-                "y": 24
+                "y": 31
             },
             "hiddenSeries": false,
             "id": 14,
@@ -669,20 +797,26 @@
             "steppedLine": false,
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "max by (virtualserver) (ts3_serverinfo_query_clients_online{virtualserver=~\"${virtualserver}\"})",
                     "legendFormat": "{{virtualserver}} QueryClients",
                     "refId": "B"
                 },
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "max by (virtualserver) (ts3_serverinfo_clients_online{virtualserver=~\"${virtualserver}\"} - ts3_serverinfo_query_clients_online{virtualserver=~\"${virtualserver}\"})",
                     "legendFormat": "{{virtualserver}} Clients",
                     "refId": "C"
                 }
             ],
             "thresholds": [],
-            "timeFrom": null,
             "timeRegions": [],
-            "timeShift": null,
             "title": "Clients online",
             "tooltip": {
                 "shared": true,
@@ -691,33 +825,24 @@
             },
             "type": "graph",
             "xaxis": {
-                "buckets": null,
                 "mode": "time",
-                "name": null,
                 "show": true,
                 "values": []
             },
             "yaxes": [
                 {
                     "format": "short",
-                    "label": null,
                     "logBase": 1,
-                    "max": null,
-                    "min": null,
                     "show": true
                 },
                 {
                     "format": "short",
-                    "label": null,
                     "logBase": 1,
-                    "max": null,
-                    "min": null,
                     "show": true
                 }
             ],
             "yaxis": {
-                "align": false,
-                "alignLevel": null
+                "align": false
             }
         },
         {
@@ -725,14 +850,17 @@
             "bars": true,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_PROMETHEUS}",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+            },
             "fill": 1,
             "fillGradient": 0,
             "gridPos": {
                 "h": 8,
                 "w": 24,
                 "x": 0,
-                "y": 32
+                "y": 39
             },
             "hiddenSeries": false,
             "id": 17,
@@ -765,15 +893,17 @@
             "steppedLine": false,
             "targets": [
                 {
+                    "datasource": {
+                        "type": "prometheus",
+                        "uid": "${DS_PROMETHEUS}"
+                    },
                     "expr": "ts3_channel_clients_online{virtualserver=~\"${virtualserver}\"}",
                     "legendFormat": "{{channel}}",
                     "refId": "A"
                 }
             ],
             "thresholds": [],
-            "timeFrom": null,
             "timeRegions": [],
-            "timeShift": null,
             "title": "Clients in Channels",
             "tooltip": {
                 "shared": true,
@@ -782,49 +912,42 @@
             },
             "type": "graph",
             "xaxis": {
-                "buckets": null,
                 "mode": "time",
-                "name": null,
                 "show": true,
                 "values": []
             },
             "yaxes": [
                 {
                     "format": "short",
-                    "label": null,
                     "logBase": 1,
-                    "max": null,
-                    "min": null,
                     "show": true
                 },
                 {
                     "format": "short",
-                    "label": null,
                     "logBase": 1,
-                    "max": null,
-                    "min": null,
                     "show": true
                 }
             ],
             "yaxis": {
-                "align": false,
-                "alignLevel": null
+                "align": false
             }
         }
     ],
-    "schemaVersion": 22,
+    "refresh": "",
+    "schemaVersion": 38,
     "style": "dark",
     "tags": [],
     "templating": {
         "list": [
             {
-                "allValue": null,
                 "current": {},
-                "datasource": "${DS_PROMETHEUS}",
+                "datasource": {
+                    "type": "prometheus",
+                    "uid": "${DS_PROMETHEUS}"
+                },
                 "definition": "label_values(ts3_serverinfo_online, virtualserver)",
                 "hide": 0,
                 "includeAll": true,
-                "label": null,
                 "multi": true,
                 "name": "virtualserver",
                 "options": [],
@@ -834,7 +957,6 @@
                 "skipUrlSync": false,
                 "sort": 0,
                 "tagValuesQuery": "",
-                "tags": [],
                 "tagsQuery": "",
                 "type": "query",
                 "useTags": false
@@ -861,6 +983,7 @@
     },
     "timezone": "",
     "title": "Teamspeak 3",
-    "uid": "XllRPbuZk",
-    "version": 13
+    "uid": "XllRPbuZks",
+    "version": 1,
+    "weekStart": ""
 }
