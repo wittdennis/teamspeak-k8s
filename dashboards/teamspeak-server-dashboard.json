@@ -1,14 +1,5 @@
 {
-    "__inputs": [
-        {
-            "name": "DS_PROMETHEUS",
-            "label": "prometheus",
-            "description": "",
-            "type": "datasource",
-            "pluginId": "prometheus",
-            "pluginName": "Prometheus"
-        }
-    ],
+    "__inputs": [],
     "__elements": {},
     "__requires": [
         {
@@ -88,7 +79,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
             },
             "fieldConfig": {
                 "defaults": {
@@ -135,7 +126,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "sum(ts3_serverinfo_online)",
                     "refId": "A"
@@ -147,7 +138,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
             },
             "fieldConfig": {
                 "defaults": {
@@ -194,7 +185,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "sum(ts3_serverinfo_channels_online{virtualserver=~\"${virtualserver}\"})",
                     "refId": "A"
@@ -206,7 +197,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
             },
             "fieldConfig": {
                 "defaults": {
@@ -253,7 +244,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "sum(ts3_channel_permanent{virtualserver=~\"${virtualserver}\"})",
                     "refId": "A"
@@ -261,7 +252,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "",
                     "refId": "B"
@@ -273,7 +264,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
             },
             "fieldConfig": {
                 "defaults": {
@@ -320,7 +311,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "sum(ts3_channel_password{virtualserver=~\"${virtualserver}\"})",
                     "refId": "A"
@@ -328,7 +319,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "",
                     "refId": "B"
@@ -340,7 +331,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
             },
             "fieldConfig": {
                 "defaults": {
@@ -387,7 +378,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "sum(ts3_channel_unencrypted{virtualserver=~\"${virtualserver}\"})",
                     "refId": "A"
@@ -395,7 +386,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "",
                     "refId": "B"
@@ -411,7 +402,7 @@
             "dashes": false,
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
             },
             "fieldConfig": {
                 "defaults": {
@@ -457,7 +448,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "rate(ts3_exporter_data_model_refresh_errors_total[5m])",
                     "legendFormat": "{{instance}}",
@@ -497,7 +488,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
             },
             "fieldConfig": {
                 "defaults": {
@@ -555,7 +546,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "ts3_serverinfo_uptime{virtualserver=~\"${virtualserver}\"}",
                     "legendFormat": "{{virtualserver}}",
@@ -598,7 +589,7 @@
             "dashes": false,
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
             },
             "fieldConfig": {
                 "defaults": {
@@ -651,7 +642,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "rate(ts3_serverinfo_control_bytes_sent_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} control bytes send",
@@ -660,7 +651,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "rate(ts3_serverinfo_control_bytes_received_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} control bytes received",
@@ -669,7 +660,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "rate(ts3_serverinfo_file_transfer_bytes_sent_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} file transfer bytes send",
@@ -678,7 +669,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "rate(ts3_serverinfo_file_transfer_bytes_received_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} file transfer bytes received",
@@ -687,7 +678,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "rate(ts3_serverinfo_keepalive_bytes_sent_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} keepalive bytes send",
@@ -696,7 +687,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "rate(ts3_serverinfo_keepalive_bytes_received_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} keepalive bytes received",
@@ -705,7 +696,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "rate(ts3_serverinfo_speech_bytes_sent_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} speech bytes send",
@@ -714,7 +705,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "rate(ts3_serverinfo_speech_bytes_received_total{virtualserver=~\"${virtualserver}\"}[5m])",
                     "legendFormat": "{{virtualserver}} speech bytes received",
@@ -758,7 +749,7 @@
             "dashes": false,
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
             },
             "fill": 1,
             "fillGradient": 0,
@@ -799,7 +790,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "max by (virtualserver) (ts3_serverinfo_query_clients_online{virtualserver=~\"${virtualserver}\"})",
                     "legendFormat": "{{virtualserver}} QueryClients",
@@ -808,7 +799,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "max by (virtualserver) (ts3_serverinfo_clients_online{virtualserver=~\"${virtualserver}\"} - ts3_serverinfo_query_clients_online{virtualserver=~\"${virtualserver}\"})",
                     "legendFormat": "{{virtualserver}} Clients",
@@ -852,7 +843,7 @@
             "dashes": false,
             "datasource": {
                 "type": "prometheus",
-                "uid": "${DS_PROMETHEUS}"
+                "uid": "$datasource"
             },
             "fill": 1,
             "fillGradient": 0,
@@ -895,7 +886,7 @@
                 {
                     "datasource": {
                         "type": "prometheus",
-                        "uid": "${DS_PROMETHEUS}"
+                        "uid": "$datasource"
                     },
                     "expr": "ts3_channel_clients_online{virtualserver=~\"${virtualserver}\"}",
                     "legendFormat": "{{channel}}",
@@ -940,10 +931,24 @@
     "templating": {
         "list": [
             {
+                "current": {
+                    "text": "default",
+                    "value": "default"
+                },
+                "hide": 0,
+                "label": "Data Source",
+                "name": "datasource",
+                "options": [],
+                "query": "prometheus",
+                "refresh": 1,
+                "regex": "",
+                "type": "datasource"
+            },
+            {
                 "current": {},
                 "datasource": {
                     "type": "prometheus",
-                    "uid": "${DS_PROMETHEUS}"
+                    "uid": "$datasource"
                 },
                 "definition": "label_values(ts3_serverinfo_online, virtualserver)",
                 "hide": 0,
