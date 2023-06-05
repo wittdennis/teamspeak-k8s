@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    app: teamspeak
+    project: teamspeak
+  name: teamspeak-rules
+  namespace: teamspeak
+spec:
+  groups:
+    - name: teamspeak
+      rules:
+        - alert: TeamspeakServerDown
+          annotations:
+            description: Teamspeak server {{ $labels.virtualserver }} is down
+            summary: Teamspeak server is down
+          for: 5m
+          expr: ts3_serverinfo_online == 0
+          labels:
+            severity: critical
