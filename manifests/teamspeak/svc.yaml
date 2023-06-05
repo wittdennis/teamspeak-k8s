@@ -18,6 +18,9 @@ spec:
     - name: filetransfer
       port: 30033
       targetPort: 30033
+    - name: metrics
+      port: 9189
+      targetPort: 9189
   selector:
     app: teamspeak
     project: teamspeak
