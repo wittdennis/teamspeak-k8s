@@ -14,6 +14,10 @@ spec:
       protocol: UDP
       targetPort: voice
       nodePort: 32492
+    - name: filetransfer
+      port: 30033
+      targetPort: filetransfer
+      nodePort: 30033
   selector:
     app: teamspeak
     project: teamspeak
