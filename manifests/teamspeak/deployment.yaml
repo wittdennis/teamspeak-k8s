@@ -52,7 +52,7 @@ spec:
               protocol: UDP
               name: voice
             - containerPort: 10011
-              name: serverquey
+              name: serverquery
             - containerPort: 30033
               name: filetransfer
           resources:
