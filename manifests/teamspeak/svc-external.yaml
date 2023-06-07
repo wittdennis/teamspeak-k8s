@@ -4,23 +4,16 @@ metadata:
   labels:
     app: teamspeak
     project: teamspeak
-  name: teamspeak
+  name: teamspeak-external
   namespace: teamspeak
 spec:
+  type: NodePort
   ports:
     - name: voice
       port: 9987
       protocol: UDP
       targetPort: voice
-    - name: serverquery
-      port: 10011
-      targetPort: serverquery
-    - name: filetransfer
-      port: 30033
-      targetPort: filetransfer
-    - name: metrics
-      port: 9189
-      targetPort: metrics
+      nodePort: 32492
   selector:
     app: teamspeak
     project: teamspeak

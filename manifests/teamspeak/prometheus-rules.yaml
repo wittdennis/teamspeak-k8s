@@ -15,6 +15,6 @@ spec:
             description: Teamspeak server {{ $labels.virtualserver }} is down
             summary: Teamspeak server is down
           for: 5m
-          expr: ts3_serverinfo_online == 0
+          expr: absent(ts3_serverinfo_online) or ts3_serverinfo_online <= 0
           labels:
             severity: critical
