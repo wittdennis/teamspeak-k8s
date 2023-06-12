@@ -1,0 +1,30 @@
+apiVersion: mariadb.mmontes.io/v1alpha1
+kind: Backup
+metadata:
+  name: teamspeak-db-scheduled-backup
+  namespace: teamspeak
+  labels:
+    app: mariadb
+    project: teamspeak
+spec:
+  mariaDbRef:
+    name: teamspeak-mariadb
+  schedule:
+    cron: "13 0 */1 * *"
+    suspend: false
+  maxRetentionDays: 30
+  storage:
+    persistentVolumeClaim:
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: hcloud-volumes
+      accessModes:
+        - ReadWriteOnce
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi
