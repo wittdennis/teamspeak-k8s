@@ -51,12 +51,6 @@ jobs:
           manifests: |
             manifests/database
 
-      - name: label mariadb service
-        run: |
-          # this is a workaround because the mariadb operator does not properly set labels for service monitor detection
-          kubectl label --overwrite svc/teamspeak-mariadb app.kubernetes.io/instance=teamspeak-mariadb
-          kubectl label --overwrite svc/teamspeak-mariadb app.kubernetes.io/name=mariadb
-
       - name: create teamspeak metrics user secret
         env:
           SERVERQUERY_USERNAME: ${{ secrets.SERVERQUERY_USERNAME }}
