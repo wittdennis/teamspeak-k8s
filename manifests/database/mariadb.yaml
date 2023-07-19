@@ -103,6 +103,7 @@ spec:
         limits:
           cpu: 300m
           memory: 512Mi
+      port: 9104
     serviceMonitor:
       prometheusRelease: default
       interval: 30s
